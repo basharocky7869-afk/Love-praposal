@@ -4,39 +4,98 @@
 <head>
 <meta charset="UTF-8">
 <title>For You ❤️</title>
+
 <style>
 body {
-  background: #ffe6f0;
-  font-family: Arial, sans-serif;
+  background: radial-gradient(circle, #ffe6f0, #ffd6e7);
+  font-family: 'Arial', sans-serif;
   text-align: center;
   padding-top: 40px;
 }
+
 h1 { color: #e6005c; }
+
 button {
-  padding: 12px 25px;
+  padding: 14px 30px;
   font-size: 18px;
   margin: 15px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
 }
-.yes { background: #ff4d88; color: white; }
-.no { background: #ccc; }
-#result { margin-top: 30px; font-size: 22px; color: #cc0052; }
+
+.yes {
+  background: #ff4d88;
+  color: white;
+  box-shadow: 0 0 10px #ff99bb;
+}
+
+.no {
+  background: #ccc;
+}
+
+#result {
+  margin-top: 30px;
+  font-size: 22px;
+  color: #b30059;
+  min-height: 120px;
+}
+
+.fade {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.heart {
+  font-size: 40px;
+  animation: beat 1s infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
 </style>
+
 <script>
 function showLove() {
-  document.getElementById("result").innerHTML =
-  "🐻❤️ Happy Rose Day baby 🌹<br>You just made my heart the happiest!";
+  const r = document.getElementById("result");
+  r.className = "fade";
+
+  r.innerHTML = "🐻 Teddy is blushing... 🥹❤️";
+
+  setTimeout(() => {
+    r.innerHTML = "You said <b>YES</b> ❤️<br>I can’t stop smiling 😊";
+  }, 2000);
+
+  setTimeout(() => {
+    r.innerHTML = "My heart right now 💓<br><span class='heart'>❤️</span>";
+  }, 4000);
+
+  setTimeout(() => {
+    r.innerHTML = "🌹 Happy Rose Day baby 🌹<br>You are my favorite person 💕";
+  }, 6500);
+
+  setTimeout(() => {
+    r.innerHTML =
+      "From today…<br>I promise care, respect & endless love 🤍<br><br>" +
+      "<b>Will you stay with me forever? 💍</b>";
+  }, 9000);
 }
+
 function tease() {
-  alert("Hey 😜 Teddy is waiting… think again ❤️");
+  alert("😏 Teddy knows you clicked NO by mistake… try YES ❤️");
 }
 </script>
 </head>
+
 <body>
 
-<h1>🐻 A Teddy Has a Question For You ❤️</h1>
+<h1>🐻 Teddy Wants to Know ❤️</h1>
 <p>Do you love me? 🥺</p>
 
 <button class="yes" onclick="showLove()">YES ❤️</button>
