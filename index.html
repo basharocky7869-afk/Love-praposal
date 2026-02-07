@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -6,101 +6,122 @@
 
 <style>
 body {
-  background: radial-gradient(circle, #ffe6f0, #ffd6e7);
-  font-family: 'Arial', sans-serif;
+  background: radial-gradient(circle, #ffdde8, #ffe6f0);
+  font-family: Arial, sans-serif;
   text-align: center;
   padding-top: 40px;
+  overflow: hidden;
 }
 
 h1 { color: #e6005c; }
 
 button {
-  padding: 14px 30px;
+  padding: 15px 35px;
   font-size: 18px;
   margin: 15px;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
 }
 
 .yes {
-  background: #ff4d88;
+  background: #ff2f6d;
   color: white;
-  box-shadow: 0 0 10px #ff99bb;
+  box-shadow: 0 0 20px #ff7aa8;
 }
 
-.no {
-  background: #ccc;
-}
+.no { background: #ccc; }
 
-#result {
+#screen {
   margin-top: 30px;
   font-size: 22px;
-  color: #b30059;
-  min-height: 120px;
-}
-
-.fade {
-  animation: fadeIn 1.5s ease-in-out;
+  color: #a8004f;
 }
 
 .heart {
-  font-size: 40px;
-  animation: beat 1s infinite;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+  font-size: 90px;
+  cursor: pointer;
+  animation: beat 0.9s infinite;
 }
 
 @keyframes beat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.3); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.pop {
+  position: fixed;
+  font-size: 30px;
+  animation: fly 2.5s linear forwards;
+}
+
+@keyframes fly {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-600px); opacity: 0; }
+}
+
+.shake {
+  animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
 }
 </style>
 
 <script>
-function showLove() {
-  const r = document.getElementById("result");
-  r.className = "fade";
+function yesClicked() {
+  document.getElementById("screen").innerHTML = `
+    <h1>💓 TOUCH MY HEART 💓</h1>
+    <div class="heart" onclick="heartTouched()">❤️</div>
+    <p>(Tap it if you’re brave 😏)</p>
+  `;
+}
 
-  r.innerHTML = "🐻 Teddy is blushing... 🥹❤️";
+function heartTouched() {
+  document.body.classList.add("shake");
+
+  for (let i = 0; i < 25; i++) {
+    let e = document.createElement("div");
+    e.className = "pop";
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.top = "80vh";
+    e.innerHTML = ["🌹","❤️","💖","💘","🧸"][Math.floor(Math.random()*5)];
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 2500);
+  }
 
   setTimeout(() => {
-    r.innerHTML = "You said <b>YES</b> ❤️<br>I can’t stop smiling 😊";
-  }, 2000);
-
-  setTimeout(() => {
-    r.innerHTML = "My heart right now 💓<br><span class='heart'>❤️</span>";
-  }, 4000);
-
-  setTimeout(() => {
-    r.innerHTML = "🌹 Happy Rose Day baby 🌹<br>You are my favorite person 💕";
-  }, 6500);
-
-  setTimeout(() => {
-    r.innerHTML =
-      "From today…<br>I promise care, respect & endless love 🤍<br><br>" +
-      "<b>Will you stay with me forever? 💍</b>";
-  }, 9000);
+    document.body.classList.remove("shake");
+    document.getElementById("screen").innerHTML = `
+      🌹 <b style="font-size:28px;">Happy Rose Day baby</b> 🌹<br><br>
+      You didn’t just touch my heart 💓<br>
+      You stole it forever 😍<br><br>
+      <b>Will you keep it with you? 💍❤️</b>
+    `;
+  }, 1200);
 }
 
 function tease() {
-  alert("😏 Teddy knows you clicked NO by mistake… try YES ❤️");
+  alert("😈 Nice try… but we both know the answer is YES ❤️");
 }
 </script>
 </head>
 
 <body>
 
-<h1>🐻 Teddy Wants to Know ❤️</h1>
+<h1>🐻 Teddy’s Big Question ❤️</h1>
 <p>Do you love me? 🥺</p>
 
-<button class="yes" onclick="showLove()">YES ❤️</button>
+<button class="yes" onclick="yesClicked()">YES ❤️</button>
 <button class="no" onclick="tease()">NO 🙈</button>
 
-<div id="result"></div>
+<div id="screen"></div>
 
 </body>
 </html>
